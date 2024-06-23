@@ -13,7 +13,7 @@ inputs:
     required: false
     default: '/opt/musl_gcc'
 runs:
-
+  using: 'composite'
   steps:
     - name: 设置github工作路径
       run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
