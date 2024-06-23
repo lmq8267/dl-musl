@@ -1,0 +1,29 @@
+name: '下载musl-gcc工具链'
+description: '自动下载指定平台的musl-gcc编译工具链'
+branding:
+  icon: 'desktop-download'
+  color: 'green'
+inputs:
+  TARGET:
+    description: '目标架构平台，请从musl.cc查看，例如aarch64-linux-musl-cross.tgz 则只需填写aarch64-linux-musl即可'
+    required: true
+    default: 'aarch64-linux-musl'
+  GCCPATH:
+    description: '下载到指定目录，默认/opt/musl_gcc目录里'
+    required: false
+    default: '/opt/musl_gcc'
+runs:
+  using: "download"
+  steps:
+    - name: 设置github工作路径
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+
+    - name: 开始下载
+      run: download.sh
+      shell: bash
+      env:
+        TARGET: ${{ inputs.TARGET }}
+        GCCPATH: ${{ inputs.GCCPATH }}
