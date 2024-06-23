@@ -22,7 +22,9 @@ runs:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
 
     - name: 开始下载
-      run: download.sh
+      run: |
+         chmod +x $GITHUB_ACTION_PATH/download.sh
+         $GITHUB_ACTION_PATH/download.sh
       shell: bash
       env:
         TARGET: ${{ inputs.TARGET }}
