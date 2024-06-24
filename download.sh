@@ -14,7 +14,7 @@ else
            GCCPTAH="/$GCCPTAH"
        fi
        if [[ ! $GCCPTAH == */ ]]; then
-          GCCPTAH="$GCCPTAH/"
+          GCCPTAH="${GCCPTAH}/"
        fi
 fi
 if [ "$STATIC" = "true" ]; then
