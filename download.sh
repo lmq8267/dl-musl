@@ -103,6 +103,10 @@ AR=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ar
 LD=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ld
 RANLIB=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ranlib
 STRIP=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-strip
+GCC_VERSION := $(shell ls ${GCCPATH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET} | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$$')
+CFLAGS="-I ${GCCPTAH}${TARGET}-cross/${TARGET}/include -L ${GCCPTAH}${TARGET}-cross/${TARGET}/lib -I ${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION}/include -L ${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION} $CFLAGS"
+CXXFLAGS="$CFLAGS $CXXFLAGS"
+LDFLAGS="$CFLAGS $LDFLAGS"
 if ! $CC -v >/dev/null 2>&1; then
     echo "【错误】 交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载失败！"
     exit 1
@@ -115,3 +119,6 @@ echo "AR=$AR" >> $GITHUB_ENV
 echo "LD=$LD" >> $GITHUB_ENV
 echo "RANLIB=$RANLIB" >> $GITHUB_ENV
 echo "STRIP=$STRIP" >> $GITHUB_ENV
+echo "CFLAGS=$CFLAGS" >> $GITHUB_ENV
+echo "CXXFLAGS=$CXXFLAGS" >> $GITHUB_ENV
+echo "LDFLAGS=$LDFLAGS" >> $GITHUB_ENV
