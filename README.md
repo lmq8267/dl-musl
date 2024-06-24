@@ -30,8 +30,9 @@ jobs:
     - name: 下载gcc
       uses: lmq8267/dl-musl@main
       with:
-        target: mipsel-linux-musl
-        gccpath: /tmp/musl_gcc/
+        target: mipsel-linux-musl  #下载的架构
+        gccpath: /tmp/musl_gcc/  #设置下载的目录
+        static: true  #添加-static静态链接标志
     - name: 输出gcc版本信息
       run: $CC -v
 ```
