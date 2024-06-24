@@ -12,6 +12,9 @@ inputs:
     description: '下载到指定目录，默认/opt/musl_gcc目录里'
     required: false
     default: '/opt/musl_gcc'
+  STATIC:
+    description: '添加-static静态链接库标志'
+    required: false
 runs:
   using: 'composite'
   steps:
@@ -29,3 +32,4 @@ runs:
       env:
         TARGET: ${{ inputs.TARGET }}
         GCCPATH: ${{ inputs.GCCPATH }}
+        STATIC: ${{ inputs.STATIC }}
