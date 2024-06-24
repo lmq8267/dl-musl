@@ -1,7 +1,7 @@
 name: '下载musl-gcc工具链'
 description: '自动下载指定平台的musl-gcc编译工具链'
 branding:
-  icon: 'desktop-download'
+  icon: 'arrow-down'
   color: 'green'
 inputs:
   TARGET:
