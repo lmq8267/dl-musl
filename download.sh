@@ -111,7 +111,7 @@ if ! $CC -v >/dev/null 2>&1; then
     echo "【错误】 交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载失败！"
     exit 1
 else
-    echo "【错误】 交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载成功！"
+    echo "交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载成功！"
 fi
 echo "CC=$CC" >> $GITHUB_ENV
 echo "CXX=$CXX" >> $GITHUB_ENV
