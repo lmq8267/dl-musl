@@ -1,5 +1,6 @@
 TARGET=$TARGET
 GCCPTAH=$GCCPATH
+STATIC=$STATIC
 
 if [ -z "$TARGET" ]; then
         echo "【错误】未设置目标架构的 TARGET 值 "
@@ -15,6 +16,11 @@ else
        if [[ ! $GCCPTAH == */ ]]; then
           GCCPTAH="$GCCPTAH/"
        fi
+fi
+if [ "$STATIC" = "true" ]; then
+   STATIC=" -static"
+else
+   STATIC=
 fi
 case "$TARGET" in
     "aarch64-linux-musl" | "aarch64_be-linux-musl" | "arm-linux-musleabi" | "arm-linux-musleabihf" | "armeb-linux-musleabi" | "armeb-linux-musleabihf" | "armel-linux-musleabi" | "armel-linux-musleabihf" )
@@ -104,7 +110,7 @@ LD=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ld
 RANLIB=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ranlib
 STRIP=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-strip
 GCC_VERSION=$(ls ${GCCPATH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET} | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$')
-CFLAGS="-I ${GCCPTAH}${TARGET}-cross/${TARGET}/include -L ${GCCPTAH}${TARGET}-cross/${TARGET}/lib -I ${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION}/include -L ${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION} $CFLAGS"
+CFLAGS="-I ${GCCPTAH}${TARGET}-cross/${TARGET}/include -L ${GCCPTAH}${TARGET}-cross/${TARGET}/lib -I ${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION}/include -L ${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION} ${STATIC}$CFLAGS"
 CXXFLAGS="$CFLAGS $CXXFLAGS"
 LDFLAGS="$CFLAGS $LDFLAGS"
 if ! $CC -v >/dev/null 2>&1; then
