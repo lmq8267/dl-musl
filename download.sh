@@ -2,7 +2,7 @@ TARGET=$TARGET
 GCCPTAH=$GCCPATH
 
 if [ -z "$TARGET" ]; then
-        echo "未设置目标架构的 TARGET 值 "
+        echo "【错误】未设置目标架构的 TARGET 值 "
         exit 1
 fi
 if [ -z "$GCCPTAH" ]; then
@@ -32,7 +32,7 @@ case "$TARGET" in
     "sh2eb-linux-muslfdpic" | "sh4-linux-musl" | "sh4eb-linux-musl" | "x86_64-linux-musl" | "x86_64-linux-muslx32 | "x86_64-w64-mingw32"  )
         ;;
     *)
-        echo "TARGET: 的架构填写错误 ！"
+        echo "【错误】TARGET: $TARGET 填写错误 ！"
         echo "请在以下支持的架构列表里选一个"
         echo "aarch64-linux-musl"
         echo "aarch64_be-linux-musl"
@@ -104,10 +104,10 @@ LD=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ld
 RANLIB=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ranlib
 STRIP=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-strip
 if ! $CC -v >/dev/null 2>&1; then
-    echo "${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  交叉编译工具链下载下载失败！"
+    echo "【错误】 交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载失败！"
     exit 1
 else
-    echo "${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  交叉编译工具链下载成功！"
+    echo "【错误】 交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载成功！"
 fi
 echo "CC=$CC" >> $GITHUB_ENV
 echo "CXX=$CXX" >> $GITHUB_ENV
