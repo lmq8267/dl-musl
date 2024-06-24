@@ -102,7 +102,7 @@ wget -q -c https://musl.cc/${TARGET}-cross.tgz -P $GCCPTAH
 echo "解压${GCCPTAH}${TARGET}-cross.tg到${GCCPTAH}"
 tar zxf ${GCCPTAH}${TARGET}-cross.tgz -C $GCCPTAH
 
-echo "PATH=${GCCPTAH}${TARGET}-cross/bin:\$PATH" >> $GITHUB_ENV
+echo "PATH=${GCCPTAH}${TARGET}-cross/bin:$PATH" >> $GITHUB_ENV
 CC=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-gcc
 CXX=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-g++
 AR=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ar
