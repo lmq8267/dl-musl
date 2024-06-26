@@ -129,5 +129,5 @@ echo "STRIP=$STRIP" >> $GITHUB_ENV
 echo "CFLAGS=$CFLAGS" >> $GITHUB_ENV
 echo "CXXFLAGS=$CXXFLAGS" >> $GITHUB_ENV
 echo "LDFLAGS=$LDFLAGS" >> $GITHUB_ENV
-echo "$CC -v"
-$CC -v
+echo "${TARGET}-gcc -v"
+${TARGET}-gcc -v
