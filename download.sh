@@ -130,4 +130,4 @@ echo "CFLAGS=$CFLAGS" >> $GITHUB_ENV
 echo "CXXFLAGS=$CXXFLAGS" >> $GITHUB_ENV
 echo "LDFLAGS=$LDFLAGS" >> $GITHUB_ENV
 echo "$CC -v"
-$cc -v
+$CC -v
