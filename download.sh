@@ -3,11 +3,11 @@ GCCPTAH=$GCCPATH
 STATIC=$STATIC
 
 if [ -z "$TARGET" ]; then
-        echo -e "\033[31;43m 【错误】 \033[0m\033[31;44;1m  未设置目标架构的 TARGET 值   \033[0m"
+        echo -e "\033[31;43m 【错误】 \033[0m\033[31;44m  未设置目标架构的 TARGET 值   \033[0m"
         exit 1
 fi
 if [ -z "$GCCPTAH" ]; then
-        echo -e "\033[32;43;1m  \033[0m\033[32;44;1m  设置musl-gcc下载目录为/opt/musl_gcc/  \033[0m"
+        echo -e "\033[32;43m  \033[0m\033[32;44m 设置musl-gcc下载目录为/opt/musl_gcc/  \033[0m"
         GCCPTAH=/opt/musl_gcc/
 else
        if [[ ! $GCCPTAH == /* ]]; then
@@ -38,8 +38,8 @@ case "$TARGET" in
     "sh2eb-linux-muslfdpic" | "sh4-linux-musl" | "sh4eb-linux-musl" | "x86_64-linux-musl" | "x86_64-linux-muslx32" | "x86_64-w64-mingw32"  )
         ;;
     *)
-        echo -e "\033[31;43m 【错误】 \033[0m\033[31;44;1m  TARGET: $TARGET 填写错误 ！  \033[0m"
-        echo -e "\033[31;43;1m  \033[0m\033[31;44;1m  请在以下支持的架构列表里选一个  \033[0m"
+        echo -e "\033[31;43m 【错误】 \033[0m\033[31;44m  TARGET: $TARGET 填写错误 ！  \033[0m"
+        echo -e "\033[31;43m  \033[0m\033[31;44m  请在以下支持的架构列表里选一个  \033[0m"
         echo "aarch64-linux-musl"
         echo "aarch64_be-linux-musl"
         echo "arm-linux-musleabi"
@@ -93,14 +93,14 @@ case "$TARGET" in
         echo "x86_64-linux-musl"
         echo "x86_64-linux-muslx32"
         echo "x86_64-w64-mingw32"
-        echo -e "\033[31;43;1m  \033[0m\033[31;44;1m    \033[0m"
+        echo -e "\033[31;43m  \033[0m\033[31;44m    \033[0m"
         exit 1
         ;;
 esac
 mkdir -p ${GCCPTAH}
-echo -e "\033[32;43;1m  \033[0m\033[32;44;1m  开始下载https://musl.cc/${TARGET}-cross.tgz  \033[0m"
+echo -e "\033[32;43m  \033[0m\033[32;44m  开始下载https://musl.cc/${TARGET}-cross.tgz  \033[0m"
 wget -q -c https://musl.cc/${TARGET}-cross.tgz -P $GCCPTAH
-echo -e "\033[32;43;1m  \033[0m\033[32;44;1m  解压${GCCPTAH}${TARGET}-cross.tg到${GCCPTAH}  \033[0m"
+echo -e "\033[32;43m  \033[0m\033[32;44m  解压${GCCPTAH}${TARGET}-cross.tg到${GCCPTAH}  \033[0m"
 tar zxf ${GCCPTAH}${TARGET}-cross.tgz -C $GCCPTAH
 
 echo "PATH=${GCCPTAH}${TARGET}-cross/bin:$PATH" >> $GITHUB_ENV
@@ -115,10 +115,10 @@ CFLAGS="-I ${GCCPTAH}${TARGET}-cross/${TARGET}/include -L ${GCCPTAH}${TARGET}-cr
 CXXFLAGS="$CFLAGS $CXXFLAGS"
 LDFLAGS="$CFLAGS $LDFLAGS"
 if ! $CC -v >/dev/null 2>&1; then
-    echo -e "\033[31;43m 【错误】 \033[0m\033[31;44;1m  交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载失败  \033[0m"
+    echo -e "\033[31;43m 【错误】 \033[0m\033[31;44m  交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载失败  \033[0m"
     exit 1
 else
-    echo -e "\033[32;43;1m  \033[0m\033[32;44;1m  交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载成功！  \033[0m"
+    echo -e "\033[32;43m  \033[0m\033[32;44m  交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载成功！  \033[0m"
 fi
 echo "CC=$CC" >> $GITHUB_ENV
 echo "CXX=$CXX" >> $GITHUB_ENV
@@ -130,4 +130,4 @@ echo "CFLAGS=$CFLAGS" >> $GITHUB_ENV
 echo "CXXFLAGS=$CXXFLAGS" >> $GITHUB_ENV
 echo "LDFLAGS=$LDFLAGS" >> $GITHUB_ENV
 echo "${TARGET}-gcc -v"
-${TARGET}-gcc -v
+$CC -v
