@@ -111,7 +111,7 @@ LD=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ld
 RANLIB=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ranlib
 STRIP=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-strip
 GCC_VERSION=$(ls ${GCCPATH}/${TARGET}-cross/lib/gcc/${TARGET})
-CFLAGS="-I ${GCCPTAH}${TARGET}-cross/${TARGET}/include -L ${GCCPTAH}${TARGET}-cross/${TARGET}/lib -I ${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION}/include -L ${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION} ${STATIC}$CFLAGS"
+CFLAGS="-I ${GCCPTAH}${TARGET}-cross/${TARGET}/include -L${GCCPTAH}${TARGET}-cross/${TARGET}/lib -I ${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION}/include -L${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION} ${STATIC}$CFLAGS"
 CXXFLAGS="$CFLAGS $CXXFLAGS"
 LDFLAGS="$CFLAGS $LDFLAGS"
 if ! $CC -v >/dev/null 2>&1; then
