@@ -114,6 +114,7 @@ STRIP=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-strip
 GCC_VERSION=$(ls ${GCCPATH}/${TARGET}-cross/lib/gcc/${TARGET})
 CFLAGS="-I ${GCCPTAH}${TARGET}-cross/${TARGET}/include -L${GCCPTAH}${TARGET}-cross/${TARGET}/lib -I ${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION}/include -L${GCCPTAH}${TARGET}-cross/${TARGET}/lib/gcc/${TARGET}/${GCC_VERSION} ${STATIC}$CFLAGS"
 CXXFLAGS="$CFLAGS $CXXFLAGS"
+CPPFLAGS="$CFLAGS $CXXFLAGS"
 LDFLAGS="$CFLAGS $LDFLAGS"
 if ! $CC -v >/dev/null 2>&1; then
     echo -e "\033[31;47m 【错误】 \033[0m\033[31;47m  交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载失败  \033[0m"
