@@ -106,6 +106,7 @@ tar zxf ${GCCPTAH}${TARGET}-cross.tgz -C $GCCPTAH
 echo "PATH=${GCCPTAH}${TARGET}-cross/bin:$PATH" >> $GITHUB_ENV
 CC=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-gcc
 CXX=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-g++
+CPP=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-cpp
 AR=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ar
 LD=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ld
 RANLIB=${GCCPTAH}${TARGET}-cross/bin/${TARGET}-ranlib
@@ -122,6 +123,7 @@ else
 fi
 echo "CC=$CC" >> $GITHUB_ENV
 echo "CXX=$CXX" >> $GITHUB_ENV
+echo "CPP=$CPP" >> $GITHUB_ENV
 echo "AR=$AR" >> $GITHUB_ENV
 echo "LD=$LD" >> $GITHUB_ENV
 echo "RANLIB=$RANLIB" >> $GITHUB_ENV
