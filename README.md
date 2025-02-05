@@ -94,5 +94,6 @@ sh4eb-linux-musl
 x86_64-linux-musl
 x86_64-linux-muslx32
 x86_64-w64-mingw32
+aarch64-w64-mingw32
 loongarch64-linux-musl
 ```
