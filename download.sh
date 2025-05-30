@@ -102,8 +102,8 @@ esac
 mkdir -p ${GCCPTAH}
 if [ "$TARGET" = "aarch64-w64-mingw32" ] ; then
 mkdir -p "${GCCPTAH}${TARGET}"
-echo -e "\033[32;47m  \033[0m\033[32;47m  开始下载https://github.com/Windows-on-ARM-Experiments/mingw-woarm64-build/releases/download/2024-07-03/aarch64-w64-mingw32-msvcrt-toolchain.tar.gz  \033[0m"
-wget -q -c https://github.com/Windows-on-ARM-Experiments/mingw-woarm64-build/releases/download/2024-07-03/aarch64-w64-mingw32-msvcrt-toolchain.tar.gz -P $GCCPTAH
+echo -e "\033[32;47m  \033[0m\033[32;47m  开始下载https://github.com/lmq8267/Toolchain/releases/download/aarch64-w64-mingw32/aarch64-w64-mingw32-msvcrt.tar.gz  \033[0m"
+wget -q -c https://github.com/lmq8267/Toolchain/releases/download/aarch64-w64-mingw32/aarch64-w64-mingw32-msvcrt.tar.gz -P $GCCPTAH
 echo -e "\033[32;47m  \033[0m\033[32;47m  解压aarch64-w64-mingw32-msvcrt-toolchain.tar.gz到${GCCPTAH}  \033[0m"
 tar xf ${GCCPTAH}aarch64-w64-mingw32-msvcrt-toolchain.tar.gz -C ${GCCPTAH}${TARGET}
 
@@ -128,8 +128,8 @@ else
 fi
 elif [ "$TARGET" = "loongarch64-linux-musl" ] ; then
 TARGET="loongarch64-unknown-linux-musl"
-echo -e "\033[32;47m  \033[0m\033[32;47m  开始下载https://github.com/musl-cross/musl-cross/releases/download/20241103/${TARGET}.tar.xz  \033[0m"
-wget -q -c https://github.com/musl-cross/musl-cross/releases/download/20241103/${TARGET}.tar.xz -P $GCCPTAH
+echo -e "\033[32;47m  \033[0m\033[32;47m  开始下载https://github.com/lmq8267/Toolchain/releases/download/musl/${TARGET}.tar.xz  \033[0m"
+wget -q -c https://github.com/lmq8267/Toolchain/releases/download/musl/${TARGET}.tar.xz -P $GCCPTAH
 echo -e "\033[32;47m  \033[0m\033[32;47m  解压${TARGET}.tar.xz到${GCCPTAH}  \033[0m"
 tar Jxf ${GCCPTAH}${TARGET}.tar.xz -C $GCCPTAH
 
@@ -153,8 +153,8 @@ else
     echo -e "\033[32;47m  \033[0m\033[32;47m  交叉编译工具链${GCCPTAH}${TARGET}/bin/${TARGET}-  下载成功！  \033[0m"
 fi
 else
-echo -e "\033[32;47m  \033[0m\033[32;47m  开始下载https://musl.cc/${TARGET}-cross.tgz  \033[0m"
-wget -q -c https://musl.cc/${TARGET}-cross.tgz -P $GCCPTAH
+echo -e "\033[32;47m  \033[0m\033[32;47m  开始下载https://github.com/lmq8267/Toolchain/releases/download/musl-cross/${TARGET}-cross.tgz  \033[0m"
+wget -q -c https://github.com/lmq8267/Toolchain/releases/download/musl-cross/${TARGET}-cross.tgz -P $GCCPTAH
 echo -e "\033[32;47m  \033[0m\033[32;47m  解压${GCCPTAH}${TARGET}-cross.tgz到${GCCPTAH}  \033[0m"
 tar zxf ${GCCPTAH}${TARGET}-cross.tgz -C $GCCPTAH
 
