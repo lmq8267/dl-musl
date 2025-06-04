@@ -104,8 +104,8 @@ if [ "$TARGET" = "aarch64-w64-mingw32" ] ; then
 mkdir -p "${GCCPTAH}${TARGET}"
 echo -e "\033[32;47m  \033[0m\033[32;47m  开始下载https://github.com/lmq8267/Toolchain/releases/download/aarch64-w64-mingw32/aarch64-w64-mingw32-msvcrt.tar.gz  \033[0m"
 wget -q -c https://github.com/lmq8267/Toolchain/releases/download/aarch64-w64-mingw32/aarch64-w64-mingw32-msvcrt.tar.gz -P $GCCPTAH
-echo -e "\033[32;47m  \033[0m\033[32;47m  解压aarch64-w64-mingw32-msvcrt-toolchain.tar.gz到${GCCPTAH}  \033[0m"
-tar xf ${GCCPTAH}aarch64-w64-mingw32-msvcrt-toolchain.tar.gz -C ${GCCPTAH}${TARGET}
+echo -e "\033[32;47m  \033[0m\033[32;47m  解压aarch64-w64-mingw32-msvcrt.tar.gz到${GCCPTAH}  \033[0m"
+tar xf ${GCCPTAH}aarch64-w64-mingw32-msvcrt.tar.gz -C ${GCCPTAH}${TARGET}
 
 echo "PATH=${GCCPTAH}${TARGET}/bin:$PATH" >> $GITHUB_ENV
 CC=${GCCPTAH}${TARGET}/bin/${TARGET}-gcc
