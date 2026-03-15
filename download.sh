@@ -35,7 +35,7 @@ case "$TARGET" in
         ;;
     "powerpcle-linux-musl" | "powerpcle-linux-muslsf" | "riscv32-linux-musl" | "riscv64-linux-musl" | "s390x-linux-musl" | "sh2-linux-musl" | "sh2-linux-muslfdpic" | "loongarch64-linux-musl" )
         ;;
-    "sh2eb-linux-muslfdpic" | "sh4-linux-musl" | "sh4eb-linux-musl" | "x86_64-linux-musl" | "x86_64-linux-muslx32" | "x86_64-w64-mingw32" | "x86_64-w64-mingw32" | "aarch64-w64-mingw32" )
+    "sh2eb-linux-muslfdpic" | "sh4-linux-musl" | "sh4eb-linux-musl" | "x86_64-linux-musl" | "x86_64-linux-muslx32" | "x86_64-w64-mingw32" | "aarch64-w64-mingw32" )
         ;;
     *)
         echo -e "\033[31;47m 【错误】 \033[0m\033[31;47m  TARGET: $TARGET 填写错误 ！  \033[0m"
@@ -99,7 +99,9 @@ case "$TARGET" in
         exit 1
         ;;
 esac
+
 mkdir -p ${GCCPTAH}
+
 if [ "$TARGET" = "aarch64-w64-mingw32" ] ; then
 mkdir -p "${GCCPTAH}${TARGET}"
 echo -e "\033[32;47m  \033[0m\033[32;47m  开始下载https://github.com/lmq8267/Toolchain/releases/download/aarch64-w64-mingw32/aarch64-w64-mingw32-msvcrt.tar.gz  \033[0m"
@@ -120,12 +122,14 @@ CFLAGS="-I${GCCPTAH}${TARGET}/${TARGET}/include -L${GCCPTAH}${TARGET}/${TARGET}/
 CXXFLAGS="$CFLAGS $CXXFLAGS"
 CPPFLAGS="$CFLAGS $CXXFLAGS"
 LDFLAGS="$CFLAGS $LDFLAGS"
+
 if ! $CC -v >/dev/null 2>&1; then
     echo -e "\033[31;47m 【错误】 \033[0m\033[31;47m  交叉编译工具链${GCCPTAH}${TARGET}/bin/${TARGET}-  下载失败  \033[0m"
     exit 1
 else
     echo -e "\033[32;47m  \033[0m\033[32;47m  交叉编译工具链${GCCPTAH}${TARGET}/bin/${TARGET}-  下载成功！  \033[0m"
 fi
+
 elif [ "$TARGET" = "loongarch64-linux-musl" ] ; then
 TARGET="loongarch64-unknown-linux-musl"
 echo -e "\033[32;47m  \033[0m\033[32;47m  开始下载https://github.com/lmq8267/Toolchain/releases/download/musl/${TARGET}.tar.xz  \033[0m"
@@ -146,12 +150,14 @@ CFLAGS="-I${GCCPTAH}${TARGET}/${TARGET}/include -L${GCCPTAH}${TARGET}/${TARGET}/
 CXXFLAGS="$CFLAGS $CXXFLAGS"
 CPPFLAGS="$CFLAGS $CXXFLAGS"
 LDFLAGS="$CFLAGS $LDFLAGS"
+
 if ! $CC -v >/dev/null 2>&1; then
     echo -e "\033[31;47m 【错误】 \033[0m\033[31;47m  交叉编译工具链${GCCPTAH}${TARGET}/bin/${TARGET}-  下载失败  \033[0m"
     exit 1
 else
     echo -e "\033[32;47m  \033[0m\033[32;47m  交叉编译工具链${GCCPTAH}${TARGET}/bin/${TARGET}-  下载成功！  \033[0m"
 fi
+
 else
 echo -e "\033[32;47m  \033[0m\033[32;47m  开始下载https://github.com/lmq8267/Toolchain/releases/download/musl-cross/${TARGET}-cross.tgz  \033[0m"
 wget -q -c https://github.com/lmq8267/Toolchain/releases/download/musl-cross/${TARGET}-cross.tgz -P $GCCPTAH
@@ -171,12 +177,19 @@ CFLAGS="-I${GCCPTAH}${TARGET}-cross/${TARGET}/include -L${GCCPTAH}${TARGET}-cros
 CXXFLAGS="$CFLAGS $CXXFLAGS"
 CPPFLAGS="$CFLAGS $CXXFLAGS"
 LDFLAGS="$CFLAGS $LDFLAGS"
+
+if [ "${TARGET%-mingw32}" != "$TARGET" ]; then
+    export WINDRES=${TARGET}-windres
+    echo "WINDRES=${TARGET}-windres" >> $GITHUB_ENV
+fi
+
 if ! $CC -v >/dev/null 2>&1; then
     echo -e "\033[31;47m 【错误】 \033[0m\033[31;47m  交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载失败  \033[0m"
     exit 1
 else
     echo -e "\033[32;47m  \033[0m\033[32;47m  交叉编译工具链${GCCPTAH}${TARGET}-cross/bin/${TARGET}-  下载成功！  \033[0m"
 fi
+
 fi
 echo "CC=$CC" >> $GITHUB_ENV
 echo "CXX=$CXX" >> $GITHUB_ENV
