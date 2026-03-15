@@ -178,7 +178,7 @@ CXXFLAGS="$CFLAGS $CXXFLAGS"
 CPPFLAGS="$CFLAGS $CXXFLAGS"
 LDFLAGS="$CFLAGS $LDFLAGS"
 
-if [ "${TARGET%-mingw32}" != "$TARGET" ]; then
+if [ "${TARGET#*mingw}" != "$TARGET" ]; then
     export WINDRES=${TARGET}-windres
     echo "WINDRES=${TARGET}-windres" >> $GITHUB_ENV
 fi
